@@ -1,0 +1,4 @@
+django==1.4#egg=django
+django-social-auth
+requests
+ChecklistDSL

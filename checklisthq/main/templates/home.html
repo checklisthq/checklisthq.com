@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>ChecklistHQ</h1>
+    {% if result %}
+        <div class="well">
+        {{ result|safe }}
+        </div>
+    {% else %}
+    <form action="." method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="btn"/>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
