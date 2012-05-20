@@ -1,17 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <h1>ChecklistHQ</h1>
     {% if result %}
         <div class="well">
         {{ result|safe }}
+        <button class="btn btn-primary" id="backbutton">Back</button>
         </div>
     {% else %}
-    <form action="." method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit" class="btn"/>
-    </form>
+    <div class="row">
+        <div class="span7">
+            <form action="." method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+                <input type="button" value="Clear" class="btn btn-danger"
+                    id="clear"/>
+                <input type="reset" value="Reset" class="btn btn-success"/>
+            </form>
+        </div>
+        <div class="well span4">
+            <h3>Help</h3>
+            <p>Type a checklist into the box on the left. You can specify
+            different parts of the checklist with the following short-hand:</p>
+            <dl>
+                <dt>= Heading =</dt>
+                <dd>Putting text between equals characters turns it into a
+                header. To create sub-headings add more equals. E.g.
+                == Sub Heading ==</dd>
+                <dt>[] Checklist item</dt>
+                <dd>Starting a line with empty square brackets turns it into
+                an item on the checklist. It'll become something associated
+                with a checkbox.</dd>
+                <dt>() Checklist group item</dt>
+                <dd>Starting a line with empty parenthesis turns it into an
+                item in a selection group. It'll become something associated
+                with a radio-button list. You'll be limited to selecting only
+                one item from the selection group. The group continues until you
+                stop using the () at the beginning of items.</dd>
+                <dt>---</dt>
+                <dd>Three or more dashes make a horizontal line break.</dd>
+                <dt>// Comment</dt>
+                <dd>Single line comments are useful for explaining something to
+                other checklist authors. They are not meant to be read by the
+                users of the checklist and will not be displayed.</dd>
+                <dt>Some regular text</dt>
+                <dd>Every line of text that doesn't match any of the short-hand
+                rules described above will become a paragraph of text in the
+                checklist.</dd>
+            </dl>
+        </div>
+    </div>
     {% endif %}
 </div>
+{% endblock %}
+{% block jq_ready %}
+$("#backbutton").click(function(e) {
+    history.go(-1);
+});
+$("#id_specification").focus();
+$("#clear").click(function(e) {
+    $("#id_specification").val("");
+    $("#id_specification").focus();
+});
 {% endblock %}

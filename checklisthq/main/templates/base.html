@@ -9,13 +9,23 @@
             </script>
           <![endif]-->
         <!-- Le styles -->
-        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico"/>
+        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico"/>
         <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
         <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"/>
         {% block css_includes %}{% endblock %}
     </head>
-    <body>
-        {% block header %}{% endblock %}
+    <body style="padding-top: 48px;">
+        {% block header %}
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">
+                        <i class="icon-check icon-white"></i>ChecklistHQ
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
         {% block content %}{% endblock %}
         {% block footer %}
         <div class="container">
