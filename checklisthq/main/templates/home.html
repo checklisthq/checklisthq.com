@@ -2,10 +2,12 @@
 {% block content %}
 <div class="container">
     {% if result %}
-        <div class="well">
+    <div class="row">
+        <div class="span8 offset2">
         {{ result|safe }}
         <button class="btn btn-primary" id="backbutton">Back</button>
         </div>
+    </div>
     {% else %}
     <div class="row">
         <div class="span7">
