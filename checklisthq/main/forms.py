@@ -1,37 +1,119 @@
 from django import forms
 
-INITIAL_TEXT = """= Heading =
+INITIAL_TEXT = """= WHO SURGICAL CHECKLIST: 1ST EDITION =
 
-This is some text. Use it to explain things and give guidance.
+---
+// Checklist DSL version - an example checklist with annotations.
+// Created by Wai Keong Wong, updated by Nicholas H.Tollervey
+// Date: 25/04/2012
+// Version 1.1
 
-Text can be on multiple lines (like this). When it's turned into a web-form each will be a separate paragraph.
+// This is a comment because it starts with two slash characters. It won't be rendered on the web-form.
 
-[] This is a single item in a checklist.
-[] This is another item in the checklist.
-[] {doctor, nurse} This is a special item since it also contains an indication of what roles are associated with it.
+// Placing text between equals characters makes it a heading. Use more equals characters to make the heading smaller.
 
-// This is a comment for other checklist authors. Use it to explain things; for example, adding a line break is easy with three or more dashes, just like this:
+== SIGN IN ==
+
+// Text on its own becomes a paragraph:
+
+PATIENT HAS CONFIRMED
+
+// Items in the checklist start with empty square brackets making them look like a checkbox.
+
+[] IDENTITY
+[] SITE
+[] PROCEDURE
+[] CONSENT
+
+// Different sections of the checklist are delineated with three or more minus signs rendered as a horizontal line:
 
 ---
 
-Regular items in the checklist that start with square brackets are great, but sometimes you need to limit the options available. Use items that start with parenthesis to achieve this:
+[] SITE MARKED/NOT APPLICABLE
 
-() This is an item in a selection group.
-() You may only choose one item in this group.
-() The group continues until you stop using the "()" at the beginning of items.
+---
 
-Because of this text, the next selection-group is separate from the one above:
+[] ANAESTHESIA SAFETY CHECK COMPLETED
 
-() Item 1
-() Item 2
-() {doctor} Item 3
+---
 
-That's it! Experiment and play!
+[] PULSE OXIMETER ON PATIENT AND FUNCTIONING
 
-// Click on the submit button below to see this checklist rendered as a web-form.
-// Click the "Back" button on the rendered form to return here.
+---
 
-All feedback most welcome... ;-)"""
+=== DOES PATIENT HAVE ===
+
+// Items that start with empty parenthesis belong to a checklist group.
+// Only one item in the checklist group can be selected.
+
+A KNOWN ALLERGY?
+() NO
+() YES
+
+---
+
+DIFFICULT AIRWAY/ASPIRATION RISK?
+() NO
+() YES, AND EQUIPMENT/ASSISTANCE AVAILABLE
+
+---
+
+RISK OF >500ML BLOOD LOSS (7ML/KG IN CHILDREN)?
+() NO
+() YES, AND ADEQUATE INTRAVENOUS ACCESS AND FLUIDS PLANNED
+
+---
+
+== TIME OUT ==
+
+[] CONFIRM ALL TEAM MEMBERS HAVE INTRODUCED THEMSELVES BY NAME AND ROLE
+
+---
+
+SURGEON, ANAESTHESIA PROFESSIONAL AND NURSE VERBALLY CONFIRM
+
+// Roles associated with specific items are listed at the start of the item within curly brackets like this:
+
+[] {SURGEON, ANAESTHESIST, NURSE} PATIENT
+[] {SURGEON, ANAESTHESIST, NURSE} SITE
+[] {SURGEON, ANAESTHESIST, NURSE} PROCEDURE
+
+---
+
+ANTICIPATED CRITICAL EVENTS
+[] {SURGEON} WHAT ARE THE CRITICAL OR UNEXPECTED STEPS, OPERATIVE DURATION, ANTICIPATED BLOOD LOSS?
+[] {ANAESTHESIST} ARE THERE ANY PATIENT-SPECIFIC CONCERNS?
+[] {NURSE} HAS STERILITY (INCLUDING INDICATOR RESULTS) BEEN CONFIRMED?
+[] {NURSE} ARE THERE EQUIPMENT ISSUES OR ANY CONCERNS?
+
+---
+
+HAS ANTIBIOTIC PROPHYLAXIS BEEN GIVEN WITHIN THE LAST 60 MINUTES?
+() YES
+() NOT APPLICABLE
+
+---
+
+IS ESSENTIAL IMAGING DISPLAYED?
+() YES
+() NOT APPLICABLE
+
+---
+
+== SIGN OUT ==
+
+NURSE VERBALLY CONFIRMS WITH THE TEAM
+[] {NURSE} THE NAME OF THE PROCEDURE RECORDED
+[] {NURSE} THAT INSTRUMENT, SPONGE AND NEEDLE COUNTS ARE CORRECT (OR NOT APPLICABLE)
+[] {NURSE} HOW THE SPECIMEN IS LABELLED (INCLUDING PATIENT NAME)
+[] {NURSE} WHETHER THERE ARE ANY EQUIPMENT PROBLEMS TO BE ADDRESSED
+
+---
+
+[] {SURGEON, ANAESTHESIST, NURSE} REVIEW THE KEY CONCERNS FOR RECOVERY AND MANAGEMENT OF THIS PATIENT
+
+// Click the "Submit" button below to see this checklist rendered as a web form.
+// Experiment and play! All feedback most welcome."""
 
 class DSLForm(forms.Form):
     """
