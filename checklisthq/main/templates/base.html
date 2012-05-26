@@ -24,6 +24,20 @@
                             style="max-width: 20px; vertical-align: bottom;"/>
                         ChecklistHQ
                     </a>
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi {{ user.username }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/logout/">Logout</a></li>
+                                </ul>
+                             </li>
+                        {% else %}
+                            <li><a href="/login/">Login</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

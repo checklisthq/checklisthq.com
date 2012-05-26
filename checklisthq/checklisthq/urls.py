@@ -5,6 +5,9 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^users/new$', 'main.views.new_user', name="new_user"),
+    url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
     url(r'^.*$', 'main.views.home', name='home'),
     # url(r'^checklisthq/', include('checklisthq.foo.urls')),
 
