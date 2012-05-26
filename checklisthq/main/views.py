@@ -3,11 +3,11 @@ import logging
 from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from checklistdsl import lex, parse
 
-from forms import DSLForm
+from forms import DSLForm, NewUserForm
 
 _logger = logging.getLogger(__name__)
 
@@ -32,7 +32,15 @@ def home(request):
     return render(request, 'home.html', context)
 
 def new_user(request):
-    form = UserCreationForm()
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            email = form.cleaned_data['email']
+            user = User.objects.create_user(username, email, password)
+    else:
+        form = NewUserForm()
     context = {}
     context['form'] = form
     return render(request, 'registration/new_user.html', context)
