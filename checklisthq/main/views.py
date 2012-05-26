@@ -3,6 +3,7 @@ import logging
 from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
 
 from checklistdsl import lex, parse
 
@@ -28,4 +29,10 @@ def home(request):
         'result': result
     }
 
-    return render(request, "home.html", context)
+    return render(request, 'home.html', context)
+
+def new_user(request):
+    form = UserCreationForm()
+    context = {}
+    context['form'] = form
+    return render(request, 'registration/new_user.html', context)
