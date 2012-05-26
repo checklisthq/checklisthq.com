@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 INITIAL_TEXT = """= WHO SURGICAL CHECKLIST: 1ST EDITION =
 
@@ -129,4 +130,9 @@ class DSLForm(forms.Form):
         'class': 'input-xlarge',
         'style': 'width: 100%',
         'rows': 32})
+    )
+
+class NewUserForm(UserCreationForm):
+    email = forms.EmailField(
+        label='Your email address'
     )
