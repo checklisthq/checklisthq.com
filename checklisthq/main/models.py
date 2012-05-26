@@ -8,3 +8,6 @@ class Checklist(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True,auto_now_add=True)
     # To add: tags, type
+
+    def __unicode__(self):
+        return self.title
