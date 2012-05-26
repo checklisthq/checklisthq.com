@@ -18,10 +18,10 @@
   <button class="btn" id="addchecklistitem">Add Checklist item</button>
   <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
   <button class="btn" id="addtextbox">Add Textbox</button>
-  <button class="btn"  id="preview">Preview</button>
 </div>
 
-         
+
+
 
             <form action="." method="post" id="checklistform">
            
@@ -32,8 +32,8 @@
             
             
 
-                
-                <input type="submit" value="Submit" class="btn btn-primary"/>
+				 <input type="button" Value="Preview"  id="preview" class="btn btn-primary" />                
+                <input type="submit" value="Save" class="btn btn-primary"/>
                 <input type="button" value="Clear" class="btn btn-danger"
                     id="clear"/>
                 <input type="reset" value="Reset" class="btn btn-success"/>
@@ -78,6 +78,9 @@
     </div>
     {% endif %}
 </div>
+
+
+
 {% endblock %}
 
 
@@ -95,6 +98,7 @@ $("#clear").click(function(e) {
 });
 
 $("#addheading").click(function(e) {
+	$("#myModal").show()
     $("#id_specification").val($("#id_specification").val()+"=HEADING=\n");
 });
 
