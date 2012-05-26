@@ -19,21 +19,35 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="/">
+                    {% if user.is_authenticated %}
+                        <a class="brand" href="/user/{{user.username}}">
+                    {% else %}
+                        <a class="brand" href="/">
+                    {% endif %}
                         <img src="{{ STATIC_URL }}img/logo_white.png"
                             style="max-width: 20px; vertical-align: bottom;"/>
                         ChecklistHQ
                     </a>
+                    <form class="navbar-search pull-left">
+                        <input type="text" class="search-query" placeholder="Search..."/>
+                    </form>
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                         {% if user.is_authenticated %}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi {{ user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="/user/{{user.username}}">
+                                        Your Checklists
+                                    </a></li>
+                                    <li><a href="/settings">Settings</a>
+                                    </li>
+                                    <li class="divider"></li>
                                     <li><a href="/logout/">Logout</a></li>
                                 </ul>
                              </li>
                         {% else %}
+                            <li><a href="/users/new">Sign up</a></li>
                             <li><a href="/login/">Login</a></li>
                         {% endif %}
                         </ul>

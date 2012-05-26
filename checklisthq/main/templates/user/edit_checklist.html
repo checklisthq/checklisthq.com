@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Checklist Editor</h1>
+    <hr/>
+    <div class="row">
+        <div class="span7">
+            {% if saved %}
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <h4 class="alert-heading">Saved</h4>
+                <p>You're changes have been saved for this checklist.</p>
+            </div>
+            {% endif %}
+            <form action="/checklist/new" method="post" id="checklistform">
+            {{ form.non_field_errors }}
+            {{form.title.label}}:<br/>
+            {{form.title}}<br/>
+            {{ form.content.label }}<br/>
+            <div class="btn-group">
+                <button class="btn" id="addheading">Add Heading</button>
+                <button class="btn" id="addchecklistitem">Add Checklist item</button>
+                <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
+                <button class="btn" id="addtextbox">Add Textbox</button>
+            </div>
+                {{ form.content }}
+                {% csrf_token %}
+                <input type="button" value="Preview" class="btn"/>
+                <input type="submit" value="Save" class="btn btn-primary"/>
+                <input type="button" value="Clear" class="btn btn-danger"
+                    id="clear"/>
+                <input type="reset" value="Reset" class="btn btn-success"/>
+            </form>
+        </div>
+        <div class="well span4">
+            <h3>Help</h3>
+            <p>Type a checklist into the box on the left. You can specify
+            different parts of the checklist with the following short-hand:</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block jq_ready %}
+$("#id_title").focus();
+$("#clear").click(function(e) {
+    $("#id_content").val("");
+    $("#id_content").focus();
+});
+$("#addheading").click(function(e) {
+    $("#id_content").val($("#id_content").val()+"=HEADING=\n");
+    return false;
+});
+$("#addchecklistitem").click(function(e) {
+    $("#id_content").val($("#id_content").val()+"[] Checklist item\n");
+    return false;
+});
+$("#addchecklistgroupitem").click(function(e) {
+    $("#id_content").val($("#id_content").val()+"() Checklist group item\n");
+    return false;
+});
+$("#addtextbox").click(function(e) {
+   $("#id_content").val($("#id_content").val()+"[...] Checklist text box\n");
+   return false;
+});
+$("#preview").click(function(e) {
+    $("#checklistform").submit();
+});
+{% endblock %}
+
