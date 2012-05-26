@@ -11,9 +11,27 @@
     {% else %}
     <div class="row">
         <div class="span7">
-            <form action="." method="post">
-                {% csrf_token %}
+        
+        
+             <div class="btn-group">
+  <button class="btn" id="addheading">Add Heading</button>
+  <button class="btn" id="addchecklistitem">Add Checklist item</button>
+  <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
+  <button class="btn" id="addtextbox">Add Textbox</button>
+  <button class="btn"  id="preview">Preview</button>
+</div>
+
+
+            <form action="." method="post" id="checklistform">
+           
+                
                 {{ form.as_p }}
+                
+                 {% csrf_token %}
+            
+            
+
+                
                 <input type="submit" value="Submit" class="btn btn-primary"/>
                 <input type="button" value="Clear" class="btn btn-danger"
                     id="clear"/>
@@ -60,7 +78,44 @@
     {% endif %}
 </div>
 {% endblock %}
-{% block jq_ready %}
+
+<script type="text/javascript">
+jQuery.fn.extend({
+    insertAtCaret: function(valueToInsertAtCaret){
+        return this.each( function(i) {
+            if ( document.selection ) {
+                this.focus();
+                selection = document.selection.createRange();
+                selection.text = valueToInsertAtCaret;
+                this.focus();
+            } else if ( this.selectionStart || this.selectionStart == "0" ) {
+                var startPosition = this.selectionStart;
+                var endPosition = this.selectionEnd;
+                var scrollTop = this.scrollTop;
+                this.value = this.value.substring(0, startPosition) + valueToInsertAtCaret + this.value.substring(endPosition, this.value.length);
+                this.focus();
+                this.selectionStart = startPosition + valueToInsertAtCaret.length;
+                this.selectionEnd = startPosition + valueToInsertAtCaret.length;
+                this.scrollTop = scrollTop;
+            } else {
+                this.value += valueToInsertAtCaret;
+                this.focus();
+            }
+        })
+    }
+});
+
+
+</script>
+
+{% block jq_ready %}\
+
+
+$('#myModal').modal({
+  show: false
+})
+
+
 $("#backbutton").click(function(e) {
     history.go(-1);
 });
@@ -69,4 +124,28 @@ $("#clear").click(function(e) {
     $("#id_specification").val("");
     $("#id_specification").focus();
 });
+
+$("#addheading").click(function(e) {
+    $("#id_specification").val($("#id_specification").val()+"=HEADING=\n");
+});
+
+$("#addchecklistitem").click(function(e) {
+    $("#id_specification").val($("#id_specification").val()+"[] Checklist item\n");
+});
+
+
+$("#addchecklistgroupitem").click(function(e) {
+    $("#id_specification").val($("#id_specification").val()+"() Checklist group item\n");
+});
+
+$("#addtextbox").click(function(e) {
+   $("#id_specification").val($("#id_specification").val()+"[...] Checklist text box\n");
+});
+
+$("#preview").click(function(e) {
+    $("#checklistform").submit();
+});
+
+
+
 {% endblock %}

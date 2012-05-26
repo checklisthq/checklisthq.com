@@ -129,7 +129,7 @@ class DSLForm(forms.Form):
         widget=forms.Textarea(attrs={
         'class': 'input-xlarge',
         'style': 'width: 100%',
-        'rows': 32})
+        'rows': 20})
     )
 
 class NewUserForm(UserCreationForm):
