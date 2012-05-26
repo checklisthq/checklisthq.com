@@ -21,6 +21,7 @@
   <button class="btn"  id="preview">Preview</button>
 </div>
 
+         
 
             <form action="." method="post" id="checklistform">
            
@@ -79,41 +80,9 @@
 </div>
 {% endblock %}
 
-<script type="text/javascript">
-jQuery.fn.extend({
-    insertAtCaret: function(valueToInsertAtCaret){
-        return this.each( function(i) {
-            if ( document.selection ) {
-                this.focus();
-                selection = document.selection.createRange();
-                selection.text = valueToInsertAtCaret;
-                this.focus();
-            } else if ( this.selectionStart || this.selectionStart == "0" ) {
-                var startPosition = this.selectionStart;
-                var endPosition = this.selectionEnd;
-                var scrollTop = this.scrollTop;
-                this.value = this.value.substring(0, startPosition) + valueToInsertAtCaret + this.value.substring(endPosition, this.value.length);
-                this.focus();
-                this.selectionStart = startPosition + valueToInsertAtCaret.length;
-                this.selectionEnd = startPosition + valueToInsertAtCaret.length;
-                this.scrollTop = scrollTop;
-            } else {
-                this.value += valueToInsertAtCaret;
-                this.focus();
-            }
-        })
-    }
-});
 
 
-</script>
-
-{% block jq_ready %}\
-
-
-$('#myModal').modal({
-  show: false
-})
+{% block jq_ready %}
 
 
 $("#backbutton").click(function(e) {
