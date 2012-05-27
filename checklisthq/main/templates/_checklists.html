@@ -1,3 +1,4 @@
+    <hr/>
     <table class="table-striped" style="width: 100%;">
         <tbody>
         {% for checklist in checklists %}
@@ -8,7 +9,7 @@
                     </a>
                 </td>
                 <td>
-                    {% if is_own_checklists %}
+                    {% if checklist.owner.id == user.id %}
                         <a href="/checklist/{{checklist.id}}/edit" class="btn btn-info">Edit</a>
                     {% else %}
                         {% if user.is_authenticated %}
@@ -20,3 +21,4 @@
         {% endfor %}
         </tbody>
     </table>
+    <hr/>

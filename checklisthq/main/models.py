@@ -9,7 +9,7 @@ class Checklist(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True,auto_now_add=True)
     deleted = models.BooleanField(default=False)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     # To add: type
 
     def __unicode__(self):

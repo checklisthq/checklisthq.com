@@ -95,10 +95,22 @@ def edit_checklist(request, id):
         return HttpResponseRedirect('/')
     context = {}
     if request.method == 'POST':
-        form = ChecklistForm(request.POST, instance=checklist)
-        if form.is_valid():
-            form.save()
-            context['saved'] = "Your changes have been saved..."
+
+		form = ChecklistForm(request.POST, instance=checklist)
+		if 'Save' in request.POST:
+			if form.is_valid():
+				form.save()
+				context['saved'] = "Your changes have been saved..."
+		if 'Preview' in request.POST:
+			if form.is_valid():
+				content = form.cleaned_data['content']
+				tokens = lex.get_tokens(content)
+				result = parse.get_form(tokens)
+				context = {
+					'checklist': checklist,
+					'result': result
+				}
+				return render(request, 'view_checklist.html', context)     
     else:
         form = ChecklistForm(instance=checklist)
     context['action'] = '/checklist/%s/edit' % id
