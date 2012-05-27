@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Browse Checklists</h1>
+    {% if checklists %}
+    {% include '_checklists.html' %}
+    {% else %}
+    <div class="alert">
+      <h4 class="alert-heading">No checklists found!</h4>
+    </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="/checklist/new" class="btn btn-primary"> Create New Checklist </a>
+    {% endif %}
+</div>
+{% endblock %}

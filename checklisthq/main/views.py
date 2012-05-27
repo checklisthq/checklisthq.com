@@ -39,6 +39,12 @@ def new_user(request):
     context['form'] = form
     return render(request, 'registration/new_user.html', context)
 
+def browse(request):
+    context = {}
+    checklists = Checklist.objects.all
+    context['checklists'] = checklists
+    return render(request, 'checklist_browse.html', context)
+
 def checklist_list(request, username):
     context = {}
     try:
@@ -47,9 +53,8 @@ def checklist_list(request, username):
         # TODO: Return a 404 when we've configured it.
         return HttpResponseRedirect('/')
     checklists = Checklist.objects.filter(owner=owner).order_by('-modified')
-    is_own_checklists = owner == request.user
     context['checklists'] = checklists
-    context['is_own_checklists'] = is_own_checklists
+    context['is_own_checklists'] = owner == request.user
     context['owner'] = owner
     return render(request, 'user/checklist_list.html', context)
 
