@@ -147,6 +147,7 @@ def print_checklist(request, id):
     context = {
         'checklist': checklist,
         'result': result,
-        'modified': modified
+        'modified': modified,
+        'username': checklist.owner.username
     }
     return render(request, 'print_checklist.html', context)
