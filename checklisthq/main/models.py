@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 class Checklist(models.Model):
     title = models.CharField(max_length=512)
@@ -8,7 +9,8 @@ class Checklist(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True,auto_now_add=True)
     deleted = models.BooleanField(default=False)
-    # To add: tags, type
+    tags = TaggableManager()
+    # To add: type
 
     def __unicode__(self):
         return self.title
