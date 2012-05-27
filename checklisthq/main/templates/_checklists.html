@@ -4,15 +4,15 @@
     {% for checklist in checklists %}
     <tr style="width: 100%">
       <td style="width: 20px;">
-        <a href="/checklist/{{checklist.id}}/print"><i class="icon-print"></i></a>
+        <a href="/checklist/{{checklist.id}}/print" title="Print this checklist"><i class="icon-print"></i></a>
       </td>
       <td style="width: 50px;">
         {% load comments %}
         {% get_comment_count for checklist as comment_count %}
-        <a href="/checklist/{{checklist.id}}/comments"><i class="icon-comment"></i> [{{ comment_count }}]</a>
+        <a href="/checklist/{{checklist.id}}/comments" title="View/add comments for this checklist [{{ comment_count }} so far]"><i class="icon-comment"></i> [{{ comment_count }}]</a>
       </td>
       <td style="width: *;">
-        <a href="/checklist/{{checklist.id}}">
+        <a href="/checklist/{{checklist.id}}" title="View this checklist">
           {{checklist.title}}
         </a>
         <span class="pull-right" style="margin-right:10px">{% include '_tags.html' %}</span>

@@ -1,6 +1,6 @@
 {% if checklist.tags.all %}
 <strong>Tags:</strong>
 {% for tag in checklist.tags.all %}
-<a class="btn btn-mini" href="/search?query={{ tag }}"><i class="icon-tag"></i> {{ tag }}</a>
+<a class="btn btn-mini" href="/search?query={{ tag }}" title="Show all checklists tagged {{ tag }}"><i class="icon-tag"></i> {{ tag }}</a>
 {% endfor %}
 {% endif %}
