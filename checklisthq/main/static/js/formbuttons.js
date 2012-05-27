@@ -28,10 +28,6 @@ function submitmodal(e){
 }
 
 $("#id_content").focus();
-$("#clear").click(function(e) {
-  $("#id_content").val("");
-  $("#id_content").focus();
-});
 
 $("#addheading").click(function(e) {
   modal("heading", "Add Heading", "= ", " =");
