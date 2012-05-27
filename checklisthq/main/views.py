@@ -138,3 +138,13 @@ def search(request):
     checklists = Checklist.objects.filter(tags__name__in=tags).distinct()
     context = { 'checklists': checklists, 'tags': ', '.join(tags) }
     return render(request, 'search_checklist.html', context)
+
+def print_checklist(request, id):
+    checklist = Checklist.objects.get(id=id)
+    tokens = lex.get_tokens(checklist.content)
+    result = parse.get_form(tokens)
+    context = {
+        'checklist': checklist,
+        'result': result
+    }
+    return render(request, 'print_checklist.html', context)
