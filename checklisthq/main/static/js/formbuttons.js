@@ -1,32 +1,18 @@
-var qtype="";
-
 $("#closebutton").click(function(e) {
   $("#myModal").hide()
 });
 
-$("#savebutton").click(function(e) {
-  $("#myModal").hide()
-  if (qtype=="heading")
-  {
-    $("#id_specification").val($("#id_specification").val()+"="+$("#modalval").val()+"=\n");
-  }
-  if (qtype=="checklistitem")
-  {
-    $("#id_specification").val($("#id_specification").val()+"[]"+$("#modalval").val()+"\n");
-  }
-  if (qtype=="checklistgroupitem")
-  {
-    $("#id_specification").val($("#id_specification").val()+"()"+$("#modalval").val()+"\n");
-  }
-
-  if (qtype=="textbox")
-  {
-    $("#id_specification").val($("#id_specification").val()+"[...]"+$("#modalval").val()+"\n");
-  }
-
-  $("#modalval").val("")
-
-});
+function modal(type, text, pre, post) {
+  $("#modaltitle").val(text);
+  $("#myModal").show();
+  $("#myModal input").focus();
+  $("#savebutton").click(function(e) {
+    $("#myModal").hide()
+    $("#id_specification").val($("#id_specification").val()+pre+$("#modalval").val()+post+"\n");
+    $("#modalval").val("");
+    return false;
+  });
+}
 
 $("#backbutton").click(function(e) {
   history.go(-1);
@@ -38,27 +24,19 @@ $("#clear").click(function(e) {
 });
 
 $("#addheading").click(function(e) {
-  qtype="heading";
-  $("#modaltitle").val("Add Heading");
-  $("#myModal").show();
+  modal("heading", "Add Heading", "=", "=");
 });
 
 $("#addchecklistitem").click(function(e) {
-  qtype="checklistitem";
-  $("#modaltitle").textContent="Add Checklist Item";
-  $("#myModal").show()
+  modal("checklistitem", "Add Checklist Item", "[]", "");
 });
 
 $("#addchecklistgroupitem").click(function(e) {
-  qtype="checklistgroupitem";
-  $("#modaltitle").val("Add Checklist group item");
-  $("#myModal").show();
+  modal("checklistgroupitem", "Add Checklist group item", "()", "");
 });
 
 $("#addtextbox").click(function(e) {
-  qtype="textbox";
-  $("#modaltitle").val("Add textbox");
-  $("#myModal").show();
+  modal("textbox", "Add textbox", "[...]", "");
 });
 
 $("#preview").click(function(e) {
