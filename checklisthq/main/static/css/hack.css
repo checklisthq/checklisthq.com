@@ -27,3 +27,7 @@ label {
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
     margin:0 
 }
+
+#id_honeypot {
+  display: none;
+}
