@@ -4,13 +4,11 @@
     <h1>Comments for {{ checklist.title }}</h1>
     <p><a href="/checklist/{{checklist.id}}" class="btn btn-primary">
     View Checklist</a></p>
-    <p>Created by: {{checklist.owner.username}}</p>
-    <p>Last updated on:
-    {{checklist.modified}}</p>
+    {% include '_metadata.html' %}
+    {% include '_tags.html' %}
     <hr/>
     {% load comments %}
     {% render_comment_list for checklist %}
-    <hr/>
     {% get_comment_form for checklist as form %}
     <form action="{% comment_form_target %}" method="post">
         {% csrf_token %}
