@@ -8,8 +8,8 @@
             {% if saved %}
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <h4 class="alert-heading">Saved</h4>
-                <p>You're changes have been saved for this checklist.</p>
+                <h4 class="alert-heading">Success!</h4>
+                <p>{{saved}}</p>
             </div>
             {% endif %}
             <form action="{{ action }}" method="post" id="checklistform">
@@ -35,7 +35,22 @@
         <div class="well span4">
             <h3>Help</h3>
             <p>Type a checklist into the box on the left. You can specify
-            different parts of the checklist with the following short-hand:</p>
+            different parts of the checklist by clicking the buttons at the
+            top of the text area.</p>
+            <dl>
+                <dt>== Heading ==</dt>
+                <dd>Enclose headings in equals characters.</dt>
+                <dt>[] Item</dt>
+                <dd>Single items start with empty square brackets.</dd>
+                <dt>() Choice Item</dt>
+                <dd>Only one item from a group of choice items can be selected.</dd>
+                <dt>[...] Text item</dt>
+                <dd>Items that allow for textual entry start with [...].</dd>
+                <dt>---</dt>
+                <dd>Three or more minus characters create a horizontal line.</dd>
+                <dt>Plain text</dt>
+                <dd>Any other text is rendered as a paragraph.</dd>
+            </dl>
         </div>
     </div>
 </div>
