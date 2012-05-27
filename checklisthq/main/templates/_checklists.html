@@ -3,6 +3,9 @@
         <tbody>
         {% for checklist in checklists %}
             <tr>
+                <td>
+                    <a href="/checklist/{{checklist.id}}/print" class="icon-print">&nbsp;</a>
+                </td>
                 <td style="width: 100%;">
                     <a href="/checklist/{{checklist.id}}">
                         {{checklist.title}}
