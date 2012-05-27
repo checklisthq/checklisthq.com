@@ -1,0 +1,25 @@
+h2 {
+    margin-bottom: 12px
+}
+
+h3 {
+    margin-bottom: 8px
+}
+
+label {
+    margin: 0
+}
+
+.help-block {
+    margin-bottom: 15px
+}
+
+.radio, .checkbox {
+    min-height: 10px;
+    padding-left: 0px;
+    line-height: 13px;
+}
+
+.radio input[type="radio"], .checkbox input[type="checkbox"] {
+    margin:0 
+}
