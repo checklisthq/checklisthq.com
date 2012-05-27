@@ -1,0 +1,22 @@
+    <table class="table-striped" style="width: 100%;">
+        <tbody>
+        {% for checklist in checklists %}
+            <tr>
+                <td style="width: 100%;">
+                    <a href="/checklist/{{checklist.id}}">
+                        {{checklist.title}}
+                    </a>
+                </td>
+                <td>
+                    {% if is_own_checklists %}
+                        <a href="/checklist/{{checklist.id}}/edit" class="btn btn-info">Edit</a>
+                    {% else %}
+                        {% if user.is_authenticated %}
+                        <a href="/checklist/{{checklist.id}}/clone" class="btn btn-info">Copy</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

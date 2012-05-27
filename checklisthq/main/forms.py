@@ -18,7 +18,7 @@ class ChecklistForm(forms.ModelForm):
     )"""
     class Meta:
         model = Checklist
-        fields = ('title', 'content')
+        fields = ('title', 'content', 'tags')
         widgets = {
             'content': Textarea(attrs={'rows': 16, 'style': 'width:100%;',
                 'class': 'input-xlarge'}),
