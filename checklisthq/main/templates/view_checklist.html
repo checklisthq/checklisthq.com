@@ -10,7 +10,7 @@
         <hr/>
         {{ result|safe }}
         <button class="btn btn-primary" id="backbutton">Back</button>
-        <a href="/checklist/{{checklist.id}}/print" class="btn btn-primary">Print</a>
+        <button class="btn btn-primary" id="printbutton">Print</button>
         </div>
     </div>
 </div>
@@ -18,5 +18,8 @@
 {% block jq_ready %}
 $("#backbutton").click(function(e) {
     history.go(-1);
+});
+$("#printbutton").click(function(e) {
+    window.print();
 });
 {% endblock %}
