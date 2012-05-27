@@ -141,10 +141,12 @@ def search(request):
 
 def print_checklist(request, id):
     checklist = Checklist.objects.get(id=id)
+    modified = checklist.modified
     tokens = lex.get_tokens(checklist.content)
     result = parse.get_form(tokens)
     context = {
         'checklist': checklist,
-        'result': result
+        'result': result,
+        'modified': modified
     }
     return render(request, 'print_checklist.html', context)
