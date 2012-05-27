@@ -13,11 +13,12 @@
             Discover, share and collaborate on ChecklistHQ
         </p>
         <hr/>
+        <a href="/browse" class="btn btn-large btn-primary">Browse all checklists</a>
         {% if user.is_authenticated %}
             <a href="/user/{{user.username}}"
                 class="btn btn-primary btn-large">{{user.username}}'s checklists</a>
         {% else %}
-            <a href="/users/new" class="btn btn-large btn-primary">Sign Up</a>
+            <a href="/users/new" class="btn btn-large btn-success">Sign Up</a>
             <a href="/login" class="btn btn-large btn-success">Log In</a>
         {% endif %}
 </div>
