@@ -155,6 +155,9 @@ LOGGING = {
     }
 }
 
+# django.auth settings
+LOGIN_URL = '/login'
+
 try:
     # We need to import EVERYTHING in local_settings
     from local_settings import *
