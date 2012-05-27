@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+
+
+
 {% block content %}
+
 <div class="container">
     <h1>Checklist Editor</h1>
     <hr/>
@@ -28,8 +32,8 @@
                 {{ form.tags }}
                 {{ form.tags.description }}<br/>
                 {% csrf_token %}
-                <input type="button" value="Preview" class="btn"/>
-                <input type="submit" value="Save" class="btn btn-primary"/>
+                <input type="submit" id="Preview" name="Preview" value="Preview" class="btn"/>
+                <input type="submit" id="Save" name="Save" Value="Save" class="btn btn-primary"/>
                 <input type="button" value="Clear" class="btn btn-danger"
                     id="clear"/>
                 <input type="reset" value="Reset" class="btn btn-success"/>
@@ -56,33 +60,24 @@
             </dl>
         </div>
     </div>
+    
+    
+    
+      <div id="myModal" class="modal hide">
+    <div class="modal-header">
+
+      <h3 id="modaltitle">Add item</h3>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="modalval"/>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn primary" id="savebutton">Add</a>
+      <a href="#" class="btn" data-dismiss="modal"  id="closebutton">Cancel</a>
+    </div>
+  </div>
 </div>
+{% block js_includes %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/formbuttons.js"></script>
 {% endblock %}
-
-{% block jq_ready %}
-$("#id_title").focus();
-$("#clear").click(function(e) {
-    $("#id_content").val("");
-    $("#id_content").focus();
-});
-$("#addheading").click(function(e) {
-    $("#id_content").val($("#id_content").val()+"=HEADING=\n");
-    return false;
-});
-$("#addchecklistitem").click(function(e) {
-    $("#id_content").val($("#id_content").val()+"[] Checklist item\n");
-    return false;
-});
-$("#addchecklistgroupitem").click(function(e) {
-    $("#id_content").val($("#id_content").val()+"() Checklist group item\n");
-    return false;
-});
-$("#addtextbox").click(function(e) {
-   $("#id_content").val($("#id_content").val()+"[...] Checklist text box\n");
-   return false;
-});
-$("#preview").click(function(e) {
-    $("#checklistform").submit();
-});
 {% endblock %}
-

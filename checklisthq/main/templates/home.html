@@ -1,120 +1,93 @@
 {% extends 'base.html' %}
+{% block js_includes %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/formbuttons.js"></script>
+{% endblock %}
 {% block content %}
 <div class="container">
-    {% if result %}
-    <div class="row">
-        <div class="span8 offset2">
-        {{ result|safe }}
-        <button class="btn btn-primary" id="backbutton">Back</button>
-        </div>
+  {% if result %}
+  <div class="row">
+    <div class="span8 offset2">
+      {{ result|safe }}
+      <button class="btn btn-primary" id="backbutton">Back</button>
     </div>
-    {% else %}
-    <div class="row">
-        <div class="span7">
-        
-        
-             <div class="btn-group">
-  <button class="btn" id="addheading">Add Heading</button>
-  <button class="btn" id="addchecklistitem">Add Checklist item</button>
-  <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
-  <button class="btn" id="addtextbox">Add Textbox</button>
-  <button class="btn"  id="preview">Preview</button>
-</div>
+  </div>
+  {% else %}
+  <div class="row">
+    <div class="span7">
 
-         
+      <div class="btn-group">
+        <button class="btn" id="addheading">Add Heading</button>
+        <button class="btn" id="addchecklistitem">Add Checklist item</button>
+        <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
+        <button class="btn" id="addtextbox">Add Textbox</button>
+      </div>
 
-            <form action="." method="post" id="checklistform">
-           
-                
-                {{ form.as_p }}
-                
-                 {% csrf_token %}
-            
-            
+      <form action="." method="post" id="checklistform">
 
-                
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-                <input type="button" value="Clear" class="btn btn-danger"
-                    id="clear"/>
-                <input type="reset" value="Reset" class="btn btn-success"/>
-            </form>
-        </div>
-        <div class="well span4">
-            <h3>Help</h3>
-            <p>Type a checklist into the box on the left. You can specify
-            different parts of the checklist with the following short-hand:</p>
-            <dl>
-                <dt>= Heading =</dt>
-                <dd>Putting text between equals characters turns it into a
-                header. To create sub-headings add more equals. E.g.
-                == Sub Heading ==</dd>
-                <dt>[] Checklist item</dt>
-                <dd>Starting a line with empty square brackets turns it into
-                an item on the checklist. It'll become something associated
-                with a checkbox.</dd>
-                <dt>() Checklist group item</dt>
-                <dd>Starting a line with empty parenthesis turns it into an
-                item in a selection group. It'll become something associated
-                with a radio-button list. You'll be limited to selecting only
-                one item from the selection group. The group continues until
-                you stop using the () at the beginning of items.</dd>
-                <dt>[...] Checklist text box</dt>
-                <dd>Starting a line with three full-stops within square
-                brackets turns it into an item for textual input. It'll
-                become something associated with a textarea.
-                </dd>
-                <dt>---</dt>
-                <dd>Three or more dashes make a horizontal line break.</dd>
-                <dt>// Comment</dt>
-                <dd>Single line comments are useful for explaining something to
-                other checklist authors. They are not meant to be read by the
-                users of the checklist and will not be displayed.</dd>
-                <dt>Some regular text</dt>
-                <dd>Every line of text that doesn't match any of the short-hand
-                rules described above will become a paragraph of text in the
-                checklist.</dd>
-            </dl>
-        </div>
+        {{ form.as_p }}
+
+        {% csrf_token %}
+
+        <input type="button" Value="Preview"  id="preview" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-primary"/>
+        <input type="button" value="Clear" class="btn btn-danger"
+        id="clear"/>
+        <input type="reset" value="Reset" class="btn btn-success"/>
+      </form>
     </div>
-    {% endif %}
+    <div class="well span4">
+      <h3>Help</h3>
+      <p>Type a checklist into the box on the left. You can specify
+      different parts of the checklist with the following short-hand:</p>
+      <dl>
+        <dt>= Heading =</dt>
+        <dd>Putting text between equals characters turns it into a
+        header. To create sub-headings add more equals. E.g.
+        == Sub Heading ==</dd>
+        <dt>[] Checklist item</dt>
+        <dd>Starting a line with empty square brackets turns it into
+        an item on the checklist. It'll become something associated
+        with a checkbox.</dd>
+        <dt>() Checklist group item</dt>
+        <dd>Starting a line with empty parenthesis turns it into an
+        item in a selection group. It'll become something associated
+        with a radio-button list. You'll be limited to selecting only
+        one item from the selection group. The group continues until
+        you stop using the () at the beginning of items.</dd>
+        <dt>[...] Checklist text box</dt>
+        <dd>Starting a line with three full-stops within square
+        brackets turns it into an item for textual input. It'll
+        become something associated with a textarea.
+        </dd>
+        <dt>---</dt>
+        <dd>Three or more dashes make a horizontal line break.</dd>
+        <dt>// Comment</dt>
+        <dd>Single line comments are useful for explaining something to
+        other checklist authors. They are not meant to be read by the
+        users of the checklist and will not be displayed.</dd>
+        <dt>Some regular text</dt>
+        <dd>Every line of text that doesn't match any of the short-hand
+        rules described above will become a paragraph of text in the
+        checklist.</dd>
+      </dl>
+    </div>
+  </div>
+  {% endif %}
+
+  <div id="myModal" class="modal hide">
+    <div class="modal-header">
+
+      <h3 id="modaltitle">Add item</h3>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="modalval"/>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn primary" id="savebutton">Add</a>
+      <a href="#" class="btn" data-dismiss="modal"  id="closebutton">Cancel</a>
+    </div>
+  </div>
 </div>
-{% endblock %}
-
-
-
-{% block jq_ready %}
-
-
-$("#backbutton").click(function(e) {
-    history.go(-1);
-});
-$("#id_specification").focus();
-$("#clear").click(function(e) {
-    $("#id_specification").val("");
-    $("#id_specification").focus();
-});
-
-$("#addheading").click(function(e) {
-    $("#id_specification").val($("#id_specification").val()+"=HEADING=\n");
-});
-
-$("#addchecklistitem").click(function(e) {
-    $("#id_specification").val($("#id_specification").val()+"[] Checklist item\n");
-});
-
-
-$("#addchecklistgroupitem").click(function(e) {
-    $("#id_specification").val($("#id_specification").val()+"() Checklist group item\n");
-});
-
-$("#addtextbox").click(function(e) {
-   $("#id_specification").val($("#id_specification").val()+"[...] Checklist text box\n");
-});
-
-$("#preview").click(function(e) {
-    $("#checklistform").submit();
-});
-
-
+</div>
 
 {% endblock %}
