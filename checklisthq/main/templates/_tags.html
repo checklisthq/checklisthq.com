@@ -1,0 +1,6 @@
+{% if checklist.tags.all %}
+Tags:
+{% for tag in checklist.tags.all %}
+{{ tag }}
+{% endfor %}
+{% endif %}

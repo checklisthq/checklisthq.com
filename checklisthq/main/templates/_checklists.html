@@ -10,6 +10,7 @@
                     <a href="/checklist/{{checklist.id}}">
                         {{checklist.title}}
                     </a>
+                    <span class="pull-right" style="margin-right:10px">{% include '_tags.html' %}</span>
                 </td>
                 <td>
                     {% if checklist.owner.id == user.id %}
