@@ -18,25 +18,25 @@
             {% endif %}
             <form action="{{ action }}" method="post" id="checklistform">
             {{ form.non_field_errors }}
-            {{ form.title.label }}:
+            <strong>{{ form.title.label }}:</strong>
             {{ form.title }}<br/>
-            {{ form.content.label }}<br/>
             <div class="btn-group">
-                <button class="btn" id="addheading">Add Heading</button>
-                <button class="btn" id="addchecklistitem">Add Checklist item</button>
-                <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
-                <button class="btn" id="addtextbox">Add Textbox</button>
+              <button class="btn" id="addheading"><i class="icon-plus"></i> Heading</button>
+              <button class="btn" id="addchecklistitem"><i class="icon-plus"></i> Item</button>
+              <button class="btn" id="addchecklistgroupitem"><i class="icon-plus"></i> Choice item</button>
+              <button class="btn" id="addtextbox"><i class="icon-plus"></i> Text item</button>
             </div>
-                {{ form.content }}<br/>
-                {{ form.tags.label }}:
-                {{ form.tags }}
-                {{ form.tags.description }}<br/>
-                {% csrf_token %}
-                <input type="submit" id="Preview" name="Preview" value="Preview" class="btn"/>
-                <input type="submit" id="Save" name="Save" Value="Save" class="btn btn-primary"/>
-                <input type="button" value="Clear" class="btn btn-danger"
-                    id="clear"/>
-                <input type="reset" value="Reset" class="btn btn-success"/>
+            {{ form.content }}<br/>
+            <strong>{{ form.tags.label }}:</strong>
+            {{ form.tags }}
+            {{ form.tags.description }}<br/>
+            {% csrf_token %}
+            <div class="btn-group">
+              <input type="submit" id="Preview" name="Preview" value="Preview" class="btn"/>
+              <input type="submit" id="Save" name="Save" Value="Save" class="btn btn-primary"/>
+              <input type="button" value="Clear" class="btn btn-danger" id="clear"/>
+              <input type="reset" value="Reset" class="btn btn-success"/>
+            </div>
             </form>
         </div>
         <div class="well span4">
@@ -61,21 +61,16 @@
         </div>
     </div>
     
-    
-    
-      <div id="myModal" class="modal hide">
-    <div class="modal-header">
-
-      <h3 id="modaltitle">Add item</h3>
+    <div id="myModal" class="modal hide">
+      <form class="well form-inline" action="#">
+      <label class="control-label" for="modalval"><strong id="modaltitle">Add item</strong></label>
+      <div class="input-append controls">
+        <input type="text" id="modalval"/>
+        <button class="btn btn-primary" id="savebutton">Add</button>
+        <button class="btn" data-dismiss="modal"  id="closebutton">Cancel</button>
+      </div>
+      </form>
     </div>
-    <div class="modal-body">
-      <input type="text" id="modalval"/>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn primary" id="savebutton">Add</a>
-      <a href="#" class="btn" data-dismiss="modal"  id="closebutton">Cancel</a>
-    </div>
-  </div>
 </div>
 {% block js_includes %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/formbuttons.js"></script>

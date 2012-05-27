@@ -48,17 +48,17 @@ $("#addheading").click(function(e) {
 });
 
 $("#addchecklistitem").click(function(e) {
-  modal("checklistitem", "Add Checklist Item", "[]", "");
+  modal("checklistitem", "Add Item", "[]", "");
   return false;
 });
 
 $("#addchecklistgroupitem").click(function(e) {
-  modal("checklistgroupitem", "Add Checklist group item", "()", "");
+  modal("checklistgroupitem", "Add Choice Item", "()", "");
   return false;
 });
 
 $("#addtextbox").click(function(e) {
-  modal("Textbox", "Add textbox", "[...]", "");
+  modal("Textbox", "Add Text Item", "[...]", "");
   return false;
 });
 
