@@ -11,6 +11,12 @@
     {% load comments %}
     {% render_comment_list for checklist %}
     <hr/>
-    {% render_comment_form for checklist %}
+    {% get_comment_form for checklist as form %}
+    <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" name="next" value="/checklist/{{checklist.id}}/comments"/>
+        <input type="submit" name="submit" value="Post" class="btn btn-primary"/>
+    </form>
 </div>
 {% endblock %}

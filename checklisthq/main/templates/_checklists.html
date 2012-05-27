@@ -6,12 +6,12 @@
       <td style="width: 20px;">
         <a href="/checklist/{{checklist.id}}/print"><i class="icon-print"></i></a>
       </td>
-      <td style="width: 40px;">
+      <td style="width: 60px;">
         {% load comments %}
         {% get_comment_count for checklist as comment_count %}
         <a href="/checklist/{{checklist.id}}/comments"><i class="icon-comment"></i> [{{ comment_count }}]</a>
       </td>
-      <td style="width: *;">
+      <td style="width: 90%;">
         <a href="/checklist/{{checklist.id}}">
           {{checklist.title}}
         </a>
