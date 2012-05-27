@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-  <div class="row">
     <h1>Comments for {{ checklist.title }}</h1>
+    <p><a href="/checklist/{{checklist.id}}" class="btn btn-primary">
+    View Checklist</a></p>
+    <p>Created by: {{checklist.owner.username}}</p>
+    <p>Last updated on:
+    {{checklist.modified}}</p>
+    <hr/>
     {% load comments %}
     {% render_comment_list for checklist %}
+    <hr/>
     {% render_comment_form for checklist %}
-  </div>
 </div>
 {% endblock %}
