@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+<h1>User Login</h1>
 
 {% if form.errors %}
 <div class="alert alert-error">
@@ -15,6 +16,7 @@
 {{form.as_p}}
 
 <input type="submit" value="Login" class="btn btn-primary"/>
+<a href="/user/new">Sign Up</a>
 <input type="hidden" name="next" value="/" />
 </form>
 
