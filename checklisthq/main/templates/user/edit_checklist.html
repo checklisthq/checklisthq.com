@@ -12,7 +12,7 @@
                 <p>You're changes have been saved for this checklist.</p>
             </div>
             {% endif %}
-            <form action="/checklist/new" method="post" id="checklistform">
+            <form action="{{ action }}" method="post" id="checklistform">
             {{ form.non_field_errors }}
             {{form.title.label}}:<br/>
             {{form.title}}<br/>

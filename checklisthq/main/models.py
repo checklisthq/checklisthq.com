@@ -7,6 +7,7 @@ class Checklist(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True,auto_now_add=True)
+    deleted = models.BooleanField(default=False)
     # To add: tags, type
 
     def __unicode__(self):

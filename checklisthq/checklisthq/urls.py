@@ -5,9 +5,11 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^login$', 'django.contrib.auth.views.login'),
     url(r'^users/new$', 'main.views.new_user', name="new_user"),
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
+    url(r'^settings$', 'django.contrib.auth.views.password_change'),
+    url(r'^done$', 'django.contrib.auth.views.password_change_done'),
     url(r'^user/(?P<username>[a-zA-Z0-9_]+)$', 'main.views.checklist_list',
         name="checklist_list"),
     url(r'^checklist/new$', 'main.views.new_checklist', name='new_checklist'),

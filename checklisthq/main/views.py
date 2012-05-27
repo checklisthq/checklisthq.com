@@ -67,6 +67,7 @@ def new_checklist(request):
             )
             context['saved'] = True
     context['form'] = form
+    context['action'] = '/checklist/new'
     return render(request, 'user/edit_checklist.html', context)
 
 def view_checklist(request, id):
@@ -83,6 +84,8 @@ def edit_checklist(request, id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/')
     checklist = Checklist.objects.get(id=id)
+    if not checklist.owner == request.user:
+        return HttpResponseRedirect('/')
     context = {}
     if request.method == 'POST':
         form = ChecklistForm(request.POST, instance=checklist)
@@ -91,5 +94,6 @@ def edit_checklist(request, id):
             context['saved'] = True
     else:
         form = ChecklistForm(instance=checklist)
+    context['action'] = '/checklist/%s/edit' % id
     context['form'] = form
     return render(request, 'user/edit_checklist.html', context)
