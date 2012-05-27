@@ -3,6 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="span8 offset2">
+        <p><small>Created by: {{checklist.owner.username}}.
+        Last updated: {{checklist.modified}}</small></p>
         <h1 style="font-size: 48px; line-height: 64px;">{{ checklist.title }}</h1>
         {% for tag in checklist.tags.all %}
         {{ tag }}
