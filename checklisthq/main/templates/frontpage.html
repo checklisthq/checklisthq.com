@@ -1,27 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-        <h1 style="font-size: 64px; line-height: 72px;">ChecklistHQ</h1>
-        <hr/>
-        <p style="font-size: 48px; line-height: 64px;">
-            Checklists save lives
-        </p>
-        <p style="font-size: 48px; line-height: 64px;">
-            Curate checklists on ChecklistHQ
-        </p>
-        <p style="font-size: 48px; line-height: 64px;">
-            Discover, share and collaborate on ChecklistHQ
-        </p>
-        <hr/>
-        <a href="/browse" class="btn btn-large btn-primary">Browse all checklists</a>
-        {% if user.is_authenticated %}
-            <a href="/user/{{user.username}}"
-                class="btn btn-primary btn-large">{{user.username}}'s checklists</a>
-        {% else %}
-            <a href="/users/new" class="btn btn-large btn-success">Sign Up</a>
-            <a href="/login" class="btn btn-large btn-success">Log In</a>
-        {% endif %}
+  <div class="hero-unit">
+    <h1>ChecklistHQ</h1>
+    <hr/>
+    <h2>Checklists save lives</h2>
+    <h2>Curate checklists on ChecklistHQ</h2>
+    <h2>Discover, share and collaborate on ChecklistHQ</h2>
+    <hr/>
+    <a href="/browse" class="btn btn-large btn-primary">Browse all checklists</a>
+    {% if user.is_authenticated %}
+    <a href="/user/{{user.username}}"
+      class="btn btn-primary btn-large">{{user.username}}'s checklists</a>
+    {% else %}
+    <a href="/users/new" class="btn btn-large btn-success">Sign Up</a>
+    <a href="/login" class="btn btn-large btn-success">Log In</a>
+    {% endif %}
+  </div>
 </div>
-{% endblock %}
-{% block jq_ready %}
 {% endblock %}
