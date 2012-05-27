@@ -120,3 +120,9 @@ def clone_checklist(request, id):
     context['form'] = form
     context['saved'] = "You have copied this checklist. Edit your version below."
     return render(request, 'user/edit_checklist.html', context)
+
+def search(request):
+    tags = [t.strip() for t in request.REQUEST["query"].split(",")]
+    checklists = Checklist.objects.filter(tags__name__in=tags).distinct()
+    context = { 'checklists': checklists, 'tags': ', '.join(tags) }
+    return render(request, 'search_checklist.html', context)
