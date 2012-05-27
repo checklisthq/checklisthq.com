@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title|default:"ChecklistHQ.com" }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+          <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+            </script>
+          <![endif]-->
+        <!-- Le styles -->
+        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"/>
+        {% block css_includes %}{% endblock %}
+    </head>
+    <body style="padding-top: 48px;">
+        {% block content %}
+            <div class="container">
+                <div class="row">
+                    <div class="span8 offset2">
+                    <h1 style="font-size: 48px; line-height: 64px;">{{ checklist.title }}</h1>
+                    <hr/>
+                    {{ result|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        {% block footer %}
+        <footer>
+            <small>Last mofified: {{modified}}</small>
+        </footer>
+        {% endblock %}
+        <script type="text/javascript">
+            window.print()
+        </script>
+    </body>
+</html>
