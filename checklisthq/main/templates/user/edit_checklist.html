@@ -14,8 +14,8 @@
             {% endif %}
             <form action="{{ action }}" method="post" id="checklistform">
             {{ form.non_field_errors }}
-            {{form.title.label}}:<br/>
-            {{form.title}}<br/>
+            {{ form.title.label }}:
+            {{ form.title }}<br/>
             {{ form.content.label }}<br/>
             <div class="btn-group">
                 <button class="btn" id="addheading">Add Heading</button>
@@ -23,7 +23,10 @@
                 <button class="btn" id="addchecklistgroupitem">Add Checklist group item</button>
                 <button class="btn" id="addtextbox">Add Textbox</button>
             </div>
-                {{ form.content }}
+                {{ form.content }}<br/>
+                {{ form.tags.label }}:
+                {{ form.tags }}
+                {{ form.tags.description }}<br/>
                 {% csrf_token %}
                 <input type="button" value="Preview" class="btn"/>
                 <input type="submit" value="Save" class="btn btn-primary"/>
