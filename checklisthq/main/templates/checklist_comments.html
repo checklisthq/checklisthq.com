@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h1>Comments for {{ checklist.title }}</h1>
+    {% load comments %}
+    {% render_comment_list for checklist %}
+    {% render_comment_form for checklist %}
+  </div>
+</div>
+{% endblock %}

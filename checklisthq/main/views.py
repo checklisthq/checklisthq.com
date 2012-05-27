@@ -87,6 +87,11 @@ def view_checklist(request, id):
     }
     return render(request, 'view_checklist.html', context)
 
+def checklist_comments(request, id):
+    checklist = Checklist.objects.get(id=id)
+    context = { 'checklist': checklist }
+    return render(request, 'checklist_comments.html', context)
+
 def edit_checklist(request, id):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/')

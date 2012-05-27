@@ -9,17 +9,14 @@
         {% include '_tags.html' %}
         <hr/>
         {{ result|safe }}
-        <button class="btn btn-primary" id="backbutton">Back</button>
-        <button class="btn btn-primary" id="printbutton">Print</button>
+        {% load comments %}
+        {% get_comment_count for checklist as comment_count %}
+        <div class="btn-group">
+          <a class="btn btn-primary" href="javascript:history.go(-1);"><i class="icon-arrow-left icon-white"></i> Back</button>
+          <a class="btn btn-primary" href="javascript:window.print();"><i class="icon-print icon-white"></i> Print</button>
+          <a class="btn btn-primary" href="/checklist/{{checklist.id}}/comments"><i class="icon-comment icon-white"></i> Show / add comments [{{ comment_count }} so far]</a>
+        </div>
         </div>
     </div>
 </div>
-{% endblock %}
-{% block jq_ready %}
-$("#backbutton").click(function(e) {
-    history.go(-1);
-});
-$("#printbutton").click(function(e) {
-    window.print();
-});
 {% endblock %}
