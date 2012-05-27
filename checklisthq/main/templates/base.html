@@ -15,7 +15,7 @@
         <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/hack.css"/>
         {% block css_includes %}{% endblock %}
     </head>
-    <body style="padding-top: 48px;">
+    <body>
         {% block header %}
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -30,7 +30,7 @@
                         ChecklistHQ
                     </a>
                     <form class="navbar-search pull-left" method="get" action="/search">
-                        <input type="text" class="search-query" name="query" placeholder="Search..."/>
+                        <input type="text" class="search-query" name="query" placeholder="Search tags (separate by comma)..."/>
                     </form>
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
