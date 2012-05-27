@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span8 offset2">
+        <h1 style="font-size: 48px; line-height: 64px;">{{ checklist.title }}</h1>
+        <hr/>
+        {{ result|safe }}
+        <button class="btn btn-primary" id="backbutton">Back</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block jq_ready %}
+$("#backbutton").click(function(e) {
+    history.go(-1);
+});
+{% endblock %}
