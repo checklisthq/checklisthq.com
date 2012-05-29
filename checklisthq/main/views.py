@@ -71,12 +71,14 @@ def new_checklist(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
+            tags = form.cleaned_data['tags']
             user = request.user
             checklist = Checklist.objects.create(
                 title=title,
                 content=content,
                 owner=user
             )
+            checklist.tags.add(*tags)
             context['saved'] = "Your changes have been saved..."
     context['form'] = form
     context['action'] = '/checklist/new'
