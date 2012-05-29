@@ -11,8 +11,8 @@
         <!-- Le styles -->
         <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico"/>
         <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
-        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"/>
         <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/hack.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"/>
         {% block css_includes %}{% endblock %}
     </head>
     <body>
@@ -20,6 +20,12 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse"
+                        data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
                     {% if user.is_authenticated %}
                         <a class="brand" href="/user/{{user.username}}">
                     {% else %}
