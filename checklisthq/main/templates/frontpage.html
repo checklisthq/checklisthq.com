@@ -7,7 +7,11 @@
     <h2>Checklists save lives</h2>
     <h2>Curate checklists on ChecklistHQ</h2>
     <h2>Discover, share and collaborate on ChecklistHQ</h2>
-    <p>&nbsp;</p>
+    <div class="alert alert-block">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <h4 class="alert-heading">Warning!</h4>
+      This website is currently in a alpha state (basically a construction site) and will contain bugs! Explore with caution :) 
+    </div>
     <a href="/browse" class="btn btn-large btn-primary">Browse all checklists</a>
     {% if user.is_authenticated %}
     <a href="/user/{{user.username}}"
