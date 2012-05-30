@@ -38,6 +38,9 @@
                     <form class="navbar-search pull-left" method="get" action="/search">
                         <input type="text" class="search-query" name="query" placeholder="Search tags (separate by comma)..."/>
                     </form>
+                    <div class="nav pull-right">
+                      <a href="https://twitter.com/ChecklistHQ" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @ChecklistHQ</a>
+                    </div>
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                         {% if user.is_authenticated %}
@@ -74,13 +77,14 @@
         {% endblock %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-         <script type="text/javascript" src="{{ STATIC_URL }}js/modal.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/modal.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/ember-latest.min.js"></script>
         {% block js_includes %}{% endblock %}
         <script type="text/javascript">
-            $(document).ready(function() {
-                {% block jq_ready %}{% endblock %}
-            });
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          $(document).ready(function() {
+            {% block jq_ready %}{% endblock %}
+          });
         </script>
     </body>
 </html>
