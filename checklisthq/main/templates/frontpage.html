@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+  <div class="alert alert-error">
+    <h4 class="alert-heading">Alpha Warning!</h4>
+    <p>This website is the result of 48 hours worth of furious hacking at the
+    very first <a href="http://nhshackday.com">NHSHackday</a>. It will contain
+    bugs! However, the developers are committed to improving this project and
+    work will continue with source code hosted
+    <a href="https://github.com/checklisthq/checklisthq.com">here</a>. You
+    can report bugs and request features
+    <a href="https://github.com/checklisthq/checklisthq.com/issues">here</a>.
+    </p>
+    <p>All feedback most welcome!</p>
+  </div>
   <div class="hero-unit">
     <h1>ChecklistHQ</h1>
     <p>&nbsp;</p>
     <h2>Checklists save lives</h2>
     <h2>Curate checklists on ChecklistHQ</h2>
     <h2>Discover, share and collaborate on ChecklistHQ</h2>
-    <div class="alert alert-block">
-      <a class="close" data-dismiss="alert" href="#">×</a>
-      <h4 class="alert-heading">Warning!</h4>
-      This website is currently in a alpha state (basically a construction site) and will contain bugs! Explore with caution :) 
-    </div>
+    <p>&nbsp;</p>
+    <p>
     <a href="/browse" class="btn btn-large btn-primary">Browse all checklists</a>
     {% if user.is_authenticated %}
     <a href="/user/{{user.username}}"
@@ -20,6 +29,11 @@
     <a href="/users/new" class="btn btn-large btn-success">Sign Up</a>
     <a href="/login" class="btn btn-large btn-success">Log In</a>
     {% endif %}
+    </p>
+    <p>
+    <a href="https://twitter.com/checklisthq" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @checklisthq</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </p>
   </div>
 </div>
 {% endblock %}
