@@ -74,13 +74,13 @@
         {% endblock %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-         <script type="text/javascript" src="{{ STATIC_URL }}js/modal.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/modal.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/ember-latest.min.js"></script>
         {% block js_includes %}{% endblock %}
         <script type="text/javascript">
-            $(document).ready(function() {
-                {% block jq_ready %}{% endblock %}
-            });
+          $(document).ready(function() {
+            {% block jq_ready %}{% endblock %}
+          });
         </script>
     </body>
 </html>
