@@ -7,15 +7,7 @@ from models import Checklist
 class ChecklistForm(forms.ModelForm):
     """
     A form for entering the specification of a checklist.
-    title = forms.CharField(
-    specification = forms.CharField(
-        label='',
-        initial='',
-        widget=forms.Textarea(attrs={
-        'class': 'input-xlarge',
-        'style': 'width: 100%',
-        'rows': 20})
-    )"""
+    """
     class Meta:
         model = Checklist
         fields = ('title', 'content', 'tags')

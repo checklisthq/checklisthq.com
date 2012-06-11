@@ -3,3 +3,4 @@ django-social-auth
 django-taggit
 requests
 ChecklistDSL
+selenium

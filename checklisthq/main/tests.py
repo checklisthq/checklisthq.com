@@ -1,16 +1,20 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
+Unit tests for forms and views. See tests in models.py for ORM related tests.
 """
+import unittest
 
-from django.test import TestCase
+from forms import ChecklistForm
+from models import Checklist
 
+class TestChecklistForm(unittest.TestCase):
+    """
+    Ensures the correct behaviour of the form used for editing checklists.
+    """
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+    def test_META(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Simple sanity checks to ensure it's set up correctly.
         """
-        self.assertEqual(1 + 1, 2)
+        self.assertEqual(Checklist, ChecklistForm.Meta.model)
+        self.assertEqual(('title', 'content', 'tags'),
+            ChecklistForm.Meta.fields)
