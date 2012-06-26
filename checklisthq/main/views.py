@@ -2,9 +2,10 @@ import logging
 
 from django.shortcuts import render
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 
 from checklistdsl import lex, parse
 
@@ -122,7 +123,7 @@ def edit_checklist(request, id):
 					'checklist': checklist,
 					'result': result
 				}
-				return render(request, 'view_checklist.html', context)     
+				return render(request, 'view_checklist.html', context)
     else:
         form = ChecklistForm(instance=checklist)
     context['action'] = '/checklist/%s/edit' % id
@@ -163,3 +164,16 @@ def print_checklist(request, id):
         'username': checklist.owner.username
     }
     return render(request, 'print_checklist.html', context)
+
+@csrf_exempt
+def preview_checklist(request):
+    """
+    Takes a request from the markitup editor and returns a preview.
+    """
+    result = ''
+    if request.method == 'POST':
+        if 'data' in request.POST:
+            raw_data = request.POST['data']
+            tokens = lex.get_tokens(raw_data)
+            result = parse.get_form(tokens)
+    return render(request, 'preview.html', {'content': result})

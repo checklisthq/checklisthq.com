@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Checklist Preview</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+          <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+            </script>
+          <![endif]-->
+        <!-- Le styles -->
+        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/hack.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css"/>
+        {% block css_includes %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+        {{ content|safe }}
+        </div>
+    </body>
+</html>
+

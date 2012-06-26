@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-
-
-
+{% block css_includes %}
+        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/editor.css"/>
+{% endblock %}
 {% block content %}
-
 <div class="container">
     <h1>Checklist Editor</h1>
     <hr/>
@@ -20,19 +19,12 @@
             {{ form.non_field_errors }}
             <strong>{{ form.title.label }}:</strong>
             {{ form.title }}<br/>
-            <div class="btn-group">
-              <button class="btn" id="addheading"><i class="icon-plus"></i> Heading</button>
-              <button class="btn" id="addchecklistitem"><i class="icon-plus"></i> Item</button>
-              <button class="btn" id="addchecklistgroupitem"><i class="icon-plus"></i> Choice item</button>
-              <button class="btn" id="addtextbox"><i class="icon-plus"></i> Text item</button>
-            </div>
             {{ form.content }}<br/>
             <strong>{{ form.tags.label }}:</strong>
             {{ form.tags }}
             {{ form.tags.description }}<br/>
             {% csrf_token %}
             <div class="btn-group">
-              <input type="button" id="preview" name="Preview" value="Preview" class="btn disabled"/>
               <input type="submit" id="Save" name="Save" Value="Save" class="btn btn-success"/>
               <input type="reset" value="Reset" class="btn btn-danger"/>
             </div>
@@ -59,19 +51,15 @@
             </dl>
         </div>
     </div>
-    
-    <div id="myModal" class="modal hide">
-      <form class="well form-inline" id="modalForm" action="">
-      <label class="control-label" for="modalval"><strong id="modaltitle">Add item</strong></label>
-      <div class="input-append controls">
-        <input type="text" id="modalval"/>
-        <button type="submit" class="btn btn-primary" id="savebutton">Add</button>
-        <button type="reset" class="btn" data-dismiss="modal"  id="closebutton">Cancel</button>
-      </div>
-      </form>
-    </div>
 </div>
+{% endblock %}
+
 {% block js_includes %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/formbuttons.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.markitup.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/editor.js"></script>
 {% endblock %}
+
+{% block jq_ready %}
+$('#id_content').markItUp(editorSettings);
 {% endblock %}
+
