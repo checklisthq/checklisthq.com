@@ -2,14 +2,13 @@
 {% block content %}
 <div class="container">
     {% if checklists %}
-    <h2>Checklists tagged {{ tags }}</h2>
+    <h2>Checklists matching {{ tags }}</h2>
     {% include '_checklists.html' %}
     {% else %}
     <div class="alert">
       <h4 class="alert-heading">No results found</h4>
-      <p>No checklists tagged {{ tags }} found!</p>
+      <p>No checklists matching {{ tags }} found!</p>
     </div>
-    
     {% endif %}
     {% if user.is_authenticated %}
         <a href="/checklist/new" class="btn btn-primary"> Create New Checklist </a>

@@ -147,8 +147,12 @@ def clone_checklist(request, id):
     return render(request, 'user/edit_checklist.html', context)
 
 def search(request):
-    tags = [t.strip() for t in request.REQUEST["query"].split(",")]
-    checklists = Checklist.objects.filter(tags__name__in=tags).distinct()
+    query = request.REQUEST["query"]
+    tags = [t.strip() for t in query.split(",")]
+    tagged_checklists = Checklist.objects.filter(tags__name__in=tags).distinct()
+    matched_checklists = Checklist.objects.filter(title__icontains=query.strip())
+    checklists = [checklist for checklist in tagged_checklists]
+    checklists.extend([checklist for checklist in matched_checklists])
     context = { 'checklists': checklists, 'tags': ', '.join(tags) }
     return render(request, 'search_checklist.html', context)
 
