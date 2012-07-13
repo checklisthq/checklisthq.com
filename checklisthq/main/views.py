@@ -1,10 +1,11 @@
 import logging
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
 from checklistdsl import lex, parse
@@ -146,6 +147,16 @@ def clone_checklist(request, id):
     context['form'] = form
     context['saved'] = "You have copied this checklist. Edit your version below."
     return render(request, 'user/edit_checklist.html', context)
+
+def delete_checklist(request, id):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    checklist = Checklist.objects.get(id=id)
+    if not checklist.owner == request.user:
+        return HttpResponseRedirect('/')
+    checklist.delete()
+    context = { 'saved': "You have deleted this checklist." }
+    return HttpResponseRedirect('/')
 
 def search(request):
     query = request.REQUEST["query"]
