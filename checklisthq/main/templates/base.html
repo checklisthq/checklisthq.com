@@ -63,6 +63,11 @@
             </div>
         </div>
         {% endblock %}
+        {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
         {% block footer %}
         <div class="container">

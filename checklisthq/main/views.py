@@ -82,8 +82,8 @@ def new_checklist(request):
                 owner=user
             )
             checklist.tags.add(*tags)
-            context['saved'] = "Your changes have been saved..."
             context['action'] = '/checklist/%s/edit' % checklist.id
+            messages.add_message(request, messages.INFO, "Your changes have been saved...")
     context['form'] = form
     return render(request, 'user/edit_checklist.html', context)
 
@@ -115,7 +115,7 @@ def edit_checklist(request, id):
 		if 'Save' in request.POST:
 			if form.is_valid():
 				form.save()
-				context['saved'] = "Your changes have been saved..."
+                messages.add_message(request, messages.INFO, "Your changes have been saved...")
 		if 'Preview' in request.POST:
 			if form.is_valid():
 				content = form.cleaned_data['content']
@@ -145,7 +145,7 @@ def clone_checklist(request, id):
     context = {}
     context['action'] = '/checklist/%s/edit' % checklist.id
     context['form'] = form
-    context['saved'] = "You have copied this checklist. Edit your version below."
+    messages.add_message(request, messages.INFO, "You have copied this checklist. Edit your version below.")
     return render(request, 'user/edit_checklist.html', context)
 
 def delete_checklist(request, id):
@@ -154,8 +154,8 @@ def delete_checklist(request, id):
     checklist = Checklist.objects.get(id=id)
     if not checklist.owner == request.user:
         return HttpResponseRedirect('/')
+    messages.add_message(request, messages.INFO, "You have deleted checklist %s." % checklist.title)
     checklist.delete()
-    context = { 'saved': "You have deleted this checklist." }
     return HttpResponseRedirect('/')
 
 def search(request):
