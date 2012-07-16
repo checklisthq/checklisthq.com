@@ -65,7 +65,10 @@
         {% endblock %}
         {% if messages %}
         {% for message in messages %}
+          <div class="alert alert-block alert-info">
+            <a class="close" data-dismiss="alert" href="#">×</a>
             {{ message }}
+          </div>
         {% endfor %}
         {% endif %}
         {% block content %}{% endblock %}
