@@ -24,7 +24,7 @@
         <div class="btn-group">
           {% if checklist.owner.id == user.id %}
           <a href="/checklist/{{checklist.id}}/edit" class="btn btn-primary" title="Edit this checklist"><i class="icon-pencil icon-white"></i></a>
-          <a href="#delModal" data-toggle="modal" class="btn btn-danger" title="Delete this checklist"><i class="icon-trash icon-white"></i></a>
+          <a href="/checklist/{{checklist.id}}/delete" class="btn btn-danger" title="Delete this checklist" onclick="return confirm('Are you sure (this step can not be undone.)')"><i class="icon-trash icon-white"></i></a>
           {% elif user.is_authenticated %}
           <a href="/checklist/{{checklist.id}}/clone" class="btn btn-primary">Clone</a>
           {% endif %}

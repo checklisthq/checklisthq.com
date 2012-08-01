@@ -64,12 +64,14 @@
         </div>
         {% endblock %}
         {% if messages %}
+        <div class="container">
         {% for message in messages %}
           <div class="alert alert-block alert-info">
             <a class="close" data-dismiss="alert" href="#">×</a>
             {{ message }}
           </div>
         {% endfor %}
+        </div>
         {% endif %}
         <div id="delModal" class="modal hide">
           <div class="modal-header">
