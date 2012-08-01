@@ -67,6 +67,7 @@ def new_checklist(request):
         return HttpResponseRedirect('/')
     form = ChecklistForm()
     context = {}
+    context['action'] = '/checklist/new'
     if request.method == 'POST':
         form = ChecklistForm(request.POST)
         if form.is_valid():
@@ -81,8 +82,8 @@ def new_checklist(request):
             )
             checklist.tags.add(*tags)
             context['saved'] = "Your changes have been saved..."
+            context['action'] = '/checklist/%s/edit' % checklist.id
     context['form'] = form
-    context['action'] = '/checklist/new'
     return render(request, 'user/edit_checklist.html', context)
 
 def view_checklist(request, id):

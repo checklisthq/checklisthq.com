@@ -4,6 +4,7 @@
 local_settings.py
 *.swp
 *.tgz
+*.zip
 checklistdb
 default
 build/*
