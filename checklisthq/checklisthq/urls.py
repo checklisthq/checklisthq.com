@@ -23,11 +23,12 @@ urlpatterns = patterns('',
         name='edit_checklist'),
     url(r'^checklist/(?P<id>[0-9]+)/clone$', 'main.views.clone_checklist',
         name='clone_checklist'),
+    url(r'^checklist/(?P<id>[0-9]+)/delete$', 'main.views.delete_checklist',
+        name='delete_checklist'),
     url(r'^checklist/(?P<id>[0-9]+)/print$', 'main.views.print_checklist',
         name='print_checklist'),
     url(r'^preview$', 'main.views.preview_checklist', name='preview'),
     (r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^.*$', 'main.views.home', name='home'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
