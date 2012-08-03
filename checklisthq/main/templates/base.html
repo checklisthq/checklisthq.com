@@ -83,7 +83,7 @@
           </div>
           <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-            <a href="/checklist/{{checklist.id}}/delete" class="btn btn-danger">Delete</a>
+            <a href="#" class="delete-href btn btn-danger">Delete</a>
           </div>
         </div>
         {% block content %}{% endblock %}
@@ -105,6 +105,8 @@
             $('#delModal').on('show', function (event) {
               title = $(this).data('modal').options.title
               $(this).find('.title').html(title)
+              href = $(this).data('modal').options.href
+              $(this).find('.delete-href').attr('href', href)
             })
             {% block jq_ready %}{% endblock %}
           });
