@@ -79,7 +79,7 @@
             <h3>Delete checklist</h3>
           </div>
           <div class="modal-body">
-            Are you sure you want to delete the checklist?
+            Are you sure you want to delete the checklist <em class="title"></em>?
           </div>
           <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Cancel</a>
@@ -102,6 +102,10 @@
         {% block js_includes %}{% endblock %}
         <script type="text/javascript">
           $(document).ready(function() {
+            $('#delModal').on('show', function (event) {
+              title = $(this).data('modal').options.title
+              $(this).find('.title').html(title)
+            })
             {% block jq_ready %}{% endblock %}
           });
         </script>
