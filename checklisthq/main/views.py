@@ -1,10 +1,11 @@
 import logging
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
 from checklistdsl import lex, parse
@@ -81,8 +82,8 @@ def new_checklist(request):
                 owner=user
             )
             checklist.tags.add(*tags)
-            context['saved'] = "Your changes have been saved..."
             context['action'] = '/checklist/%s/edit' % checklist.id
+            messages.add_message(request, messages.INFO, "Your changes have been saved...")
     context['form'] = form
     return render(request, 'user/edit_checklist.html', context)
 
@@ -114,7 +115,7 @@ def edit_checklist(request, id):
 		if 'Save' in request.POST:
 			if form.is_valid():
 				form.save()
-				context['saved'] = "Your changes have been saved..."
+                messages.add_message(request, messages.INFO, "Your changes have been saved...")
 		if 'Preview' in request.POST:
 			if form.is_valid():
 				content = form.cleaned_data['content']
@@ -144,8 +145,18 @@ def clone_checklist(request, id):
     context = {}
     context['action'] = '/checklist/%s/edit' % checklist.id
     context['form'] = form
-    context['saved'] = "You have copied this checklist. Edit your version below."
+    messages.add_message(request, messages.INFO, "You have copied this checklist. Edit your version below.")
     return render(request, 'user/edit_checklist.html', context)
+
+def delete_checklist(request, id):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    checklist = Checklist.objects.get(id=id)
+    if not checklist.owner == request.user:
+        return HttpResponseRedirect('/')
+    messages.add_message(request, messages.INFO, "You have deleted checklist %s." % checklist.title)
+    checklist.delete()
+    return HttpResponseRedirect('/')
 
 def search(request):
     query = request.REQUEST["query"]

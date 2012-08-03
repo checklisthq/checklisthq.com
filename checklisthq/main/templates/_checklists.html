@@ -4,6 +4,9 @@
     {% for checklist in checklists %}
     <tr style="width: 100%">
       <td style="width: 20px;">
+        <a href="/checklist/{{checklist.id}}" title="View this checklist"><i class="icon-eye-open"></i></a>
+      </td>
+      <td style="width: 20px;">
         <a href="/checklist/{{checklist.id}}/print" title="Print this checklist"><i class="icon-print"></i></a>
       </td>
       <td style="width: 50px;">
@@ -17,12 +20,15 @@
         </a>
         <span class="pull-right" style="margin-right:10px">{% include '_tags.html' %}</span>
       </td>
-      <td style="width: 40px;">
-        {% if checklist.owner.id == user.id %}
-        <a href="/checklist/{{checklist.id}}/edit" class="btn btn-info">Edit</a>
-        {% elif user.is_authenticated %}
-        <a href="/checklist/{{checklist.id}}/clone" class="btn btn-info">Clone</a>
-        {% endif %}
+      <td style="width: 80px;">
+        <div class="btn-group">
+          {% if checklist.owner.id == user.id %}
+          <a href="/checklist/{{checklist.id}}/edit" class="btn btn-primary" title="Edit this checklist"><i class="icon-pencil icon-white"></i></a>
+          <a data-title="{{checklist.title}}" data-href="/checklist/{{checklist.id}}/delete" data-toggle="modal" data-target="#delModal" class="btn btn-danger" title="Delete this checklist"><i class="icon-trash icon-white"></i></a>
+          {% elif user.is_authenticated %}
+          <a href="/checklist/{{checklist.id}}/clone" class="btn btn-primary">Clone</a>
+          {% endif %}
+        </div>
       </td>
     </tr>
     {% endfor %}
