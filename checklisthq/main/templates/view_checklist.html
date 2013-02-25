@@ -11,8 +11,11 @@
         {% load comments %}
         {% get_comment_count for checklist as comment_count %}
         <div class="btn-group">
-          <a class="btn btn-primary" href="javascript:history.go(-1);"><i class="icon-arrow-left icon-white"></i> Back</button>
-          <a class="btn btn-primary" href="/checklist/{{checklist.id}}/print"><i class="icon-print icon-white"></i> Print</button>
+          <a class="btn btn-primary" href="javascript:history.go(-1);"><i class="icon-arrow-left icon-white"></i> Back</a>
+          <a class="btn btn-primary" href="/checklist/{{checklist.id}}/print"><i class="icon-print icon-white"></i> Print</a>
+          {% if request.user == checklist.owner %}
+          <a class="btn btn-primary" href="{% url edit_checklist checklist.id %}"><i class="icon-pencil icon-white"></i>Edit</a>
+          {% endif %}
           <a class="btn btn-primary" href="/checklist/{{checklist.id}}/comments"><i class="icon-comment icon-white"></i> Show / add comments [{{ comment_count }} so far]</a>
         </div>
         </div>
