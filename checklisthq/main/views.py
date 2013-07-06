@@ -7,11 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 from checklistdsl import lex, parse
 
 from forms import ChecklistForm, NewUserForm
 from models import Checklist
+
 
 _logger = logging.getLogger(__name__)
 
@@ -161,10 +163,12 @@ def delete_checklist(request, id):
 def search(request):
     query = request.REQUEST["query"]
     tags = [t.strip() for t in query.split(",")]
-    tagged_checklists = Checklist.objects.filter(tags__name__in=tags).distinct()
-    matched_checklists = Checklist.objects.filter(title__icontains=query.strip())
-    checklists = [checklist for checklist in tagged_checklists]
-    checklists.extend([checklist for checklist in matched_checklists])
+
+    tag_query = Q(tags__name__in=tags)
+    title_query = Q(title__icontains=query.strip())
+
+    matched_checklists = Checklist.objects.filter(tag_query | title_query)
+    checklists = [checklist for checklist in matched_checklists]
     context = { 'checklists': checklists, 'tags': ', '.join(tags) }
     return render(request, 'search_checklist.html', context)
 
