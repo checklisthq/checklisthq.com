@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.core.urlresolvers import reverse
 
 from checklistdsl import lex, parse
 
@@ -72,18 +73,15 @@ def new_checklist(request):
     if request.method == 'POST':
         form = ChecklistForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
             tags = form.cleaned_data['tags']
-            user = request.user
-            checklist = Checklist.objects.create(
-                title=title,
-                content=content,
-                owner=user
-            )
+            checklist = form.save(commit=False)
+            checklist.owner = request.user
+            checklist.save()
             checklist.tags.add(*tags)
             context['action'] = '/checklist/%s/edit' % checklist.id
             messages.add_message(request, messages.INFO, "Your changes have been saved...")
+            return HttpResponseRedirect(reverse('view_checklist', args=[checklist.id]))
+
     context['form'] = form
     return render(request, 'user/edit_checklist.html', context)
 
@@ -116,6 +114,7 @@ def edit_checklist(request, id):
 			if form.is_valid():
 				form.save()
                 messages.add_message(request, messages.INFO, "Your changes have been saved...")
+                return HttpResponseRedirect(reverse('view_checklist', args=[checklist.id]))
 		if 'Preview' in request.POST:
 			if form.is_valid():
 				content = form.cleaned_data['content']

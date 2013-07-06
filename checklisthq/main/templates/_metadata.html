@@ -1,2 +1,11 @@
-        <p><small>Created by: {{checklist.owner.username}}.
-        Last updated: {{checklist.modified}}</small></p>
+{% if checklist.description %}
+<p id="partial_description">
+{{ checklist.description|truncatechars:140 }}
+{% if checklist.description|length|get_digit:"-1" > 140 %}<a href="#" onclick="$('#full_description').toggle();$('#partial_description').toggle();return false;">view all</a>{% endif %}
+</p>
+<p id="full_description" style="display:none;">
+{{ checklist.description }}
+</p>
+{% endif %}
+<p><small>Created by: {{checklist.owner.username}}.
+Last updated: {{checklist.modified}}</small></p>
