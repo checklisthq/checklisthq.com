@@ -8,3 +8,7 @@ local_settings.py
 checklistdb
 default
 build/*
+.Python
+bin/
+include/
+lib/
